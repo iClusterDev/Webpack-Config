@@ -5,20 +5,14 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
-const webpack = require("webpack"); // this is for wp middleware
-
 module.exports = merge(common, {
   mode: "production",
-  context: path.resolve(__dirname, "dist"), // this is for wp middleware
   output: {
     // filename: "[name].[contentHash].boundle.min.js",
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].[hash].boundle.min.js",
-    publicPath: "/" // this is for wp middleware
+    filename: "[name].[hash].boundle.min.js"
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(), // this is for wp middleware
-    new webpack.NoEmitOnErrorsPlugin(), // this is for wp middleware
     new MiniCssExtractPlugin({ filename: "[name].[contentHash].boundle.min.css" }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
