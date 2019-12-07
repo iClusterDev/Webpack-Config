@@ -1,19 +1,7 @@
 const merge = require("webpack-merge");
-const common = require("./webpack.common");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { common, HtmlWebpackPlugins } = require("./webpack.common");
 
 const pages = ["index.html", "about.html"];
-
-const HtmlWebpackPlugins = (pages = [], minify = {}) => {
-  if (!Array.isArray(pages)) return [];
-  return pages.map(page => {
-    return new HtmlWebpackPlugin({
-      filename: page,
-      template: `./src/${page}`,
-      minify: { ...minify }
-    });
-  });
-};
 
 module.exports = merge(common, {
   mode: "development",
@@ -23,7 +11,15 @@ module.exports = merge(common, {
     rules: [
       {
         test: /\.scss$/,
-        use: ["style-loader", { loader: "css-loader", options: { importLoaders: 1 } }, "postcss-loader", "sass-loader"]
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: { importLoaders: 1 }
+          },
+          "postcss-loader",
+          "sass-loader"
+        ]
       }
     ]
   }
