@@ -1,4 +1,3 @@
-import "../scss/main.scss";
 import add from "./components/add";
 import sub from "./components/sub";
 
