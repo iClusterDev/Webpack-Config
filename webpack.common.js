@@ -13,10 +13,6 @@ const HtmlWebpackPlugins = (pages = [], minify = {}) => {
 
 const common = {
   entry: { main: "./main.js" },
-  stats: {
-    children: false,
-    modules: false
-  },
   module: {
     rules: [
       {
@@ -29,9 +25,7 @@ const common = {
           {
             loader: "file-loader",
             options: {
-              // name: "[name].[hash].[ext]",
-              name: "[name].[ext]",
-              outputPath: "img",
+              name: "[name]-[contenthash].[ext]",
               esModule: false
             }
           },

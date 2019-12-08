@@ -6,6 +6,11 @@ const pages = ["index.html", "about.html"];
 module.exports = merge(common, {
   mode: "development",
   output: { filename: "[name].boundle.js" },
+  stats: {
+    children: false,
+    modules: false,
+    assets: false
+  },
   plugins: [...HtmlWebpackPlugins(pages)],
   module: {
     rules: [
