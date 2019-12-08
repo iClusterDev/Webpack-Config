@@ -14,6 +14,10 @@ const HtmlWebpackPlugins = (pages = [], minify = {}) => {
 const common = {
   // entry: { main: "./main.js", vendor: "./vendor.js" },
   entry: { main: "./main.js" },
+  stats: {
+    children: false,
+    modules: false
+  },
   module: {
     rules: [
       {
@@ -21,7 +25,6 @@ const common = {
         use: [{ loader: "html-loader" }]
       },
       {
-        // FIXME: add image compressor
         test: /\.(svg|png|jpeg|jpg|gif)$/,
         use: [
           {
@@ -33,6 +36,7 @@ const common = {
             }
           },
           {
+            // FIXME enable in prod only?
             loader: "image-webpack-loader",
             options: {
               mozjpeg: {

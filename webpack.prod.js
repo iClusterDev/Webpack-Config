@@ -12,12 +12,8 @@ module.exports = merge(common, {
     filename: "js/[name].[contentHash].boundle.min.js",
     path: path.resolve(__dirname, "dist")
   },
-  stats: {
-    children: false,
-    modules: false
-  },
   plugins: [
-    new CleanWebpackPlugin({ dry: true }),
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({ filename: "css/[name].[contentHash].boundle.min.css" }),
     ...HtmlWebpackPlugins(pages, {
       removeAttributeQuotes: true,
@@ -28,7 +24,6 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        // js babel transpiler
         test: /\.m?js$/,
         exclude: /(node_modules)/,
         use: {
@@ -39,7 +34,6 @@ module.exports = merge(common, {
         }
       },
       {
-        // scss loader
         test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader,
