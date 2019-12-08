@@ -9,12 +9,12 @@ const pages = ["index.html", "about.html"];
 module.exports = merge(common, {
   mode: "production",
   output: {
-    filename: "js/[name].[contentHash].boundle.min.js",
+    filename: "[name].[hash].boundle.min.js",
     path: path.resolve(__dirname, "dist")
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({ filename: "css/[name].[contentHash].boundle.min.css" }),
+    new MiniCssExtractPlugin({ filename: "[name].[hash].boundle.min.css" }),
     ...HtmlWebpackPlugins(pages, {
       removeAttributeQuotes: true,
       collapseWhitespace: true,

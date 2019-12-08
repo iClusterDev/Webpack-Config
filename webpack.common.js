@@ -12,7 +12,6 @@ const HtmlWebpackPlugins = (pages = [], minify = {}) => {
 };
 
 const common = {
-  // entry: { main: "./main.js", vendor: "./vendor.js" },
   entry: { main: "./main.js" },
   stats: {
     children: false,
@@ -30,7 +29,8 @@ const common = {
           {
             loader: "file-loader",
             options: {
-              name: "[name].[hash].[ext]",
+              // name: "[name].[hash].[ext]",
+              name: "[name].[ext]",
               outputPath: "img",
               esModule: false
             }
