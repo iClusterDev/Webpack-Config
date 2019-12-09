@@ -1,7 +1,6 @@
 const merge = require("webpack-merge");
-const { common, HtmlWebpackPlugins } = require("./webpack.common");
-
-const pages = ["index.html", "about.html"];
+const { common } = require("./webpack.common");
+const { HtmlWebpackPlugins } = require("./webpack.common");
 
 module.exports = merge(common, {
   mode: "development",
@@ -11,7 +10,7 @@ module.exports = merge(common, {
     modules: false,
     assets: false
   },
-  plugins: [...HtmlWebpackPlugins(pages)],
+  plugins: [...HtmlWebpackPlugins("./src")],
   module: {
     rules: [
       {

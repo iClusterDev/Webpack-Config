@@ -1,10 +1,9 @@
 const path = require("path");
 const merge = require("webpack-merge");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { common } = require("./webpack.common");
+const { HtmlWebpackPlugins } = require("./webpack.common");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const { common, HtmlWebpackPlugins } = require("./webpack.common");
-
-const pages = ["index.html", "about.html"];
 
 module.exports = merge(common, {
   mode: "production",
@@ -34,7 +33,7 @@ module.exports = merge(common, {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({ filename: "[name]-[contenthash].boundle.min.css" }),
-    ...HtmlWebpackPlugins(pages, {
+    ...HtmlWebpackPlugins("./src", {
       removeAttributeQuotes: true,
       collapseWhitespace: true,
       removeComments: true

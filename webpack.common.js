@@ -1,11 +1,28 @@
+const fs = require("fs");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const HtmlWebpackPlugins = (pages = [], minify = {}) => {
+const getHtmlPages = srcDir => {
+  const pages = fs.readdirSync(srcDir, (err, files) => {
+    if (err) reject(new Error(`Error: Unable to scan ${srcDir}`));
+    return files;
+  });
+  return pages
+    .map(page => {
+      const match = page.match(/\.html$/);
+      return match ? match.input : null;
+    })
+    .filter(page => {
+      return page;
+    });
+};
+
+const HtmlWebpackPlugins = (srcDir, minify = {}) => {
+  const pages = getHtmlPages(srcDir);
   if (!Array.isArray(pages)) return [];
   return pages.map(page => {
     return new HtmlWebpackPlugin({
       filename: page,
-      template: `./src/${page}`,
+      template: `${srcDir}/${page}`,
       minify: { ...minify }
     });
   });
